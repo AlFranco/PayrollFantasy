@@ -5,36 +5,43 @@
 
 var Detector = {
 
-	canvas: !! window.CanvasRenderingContext2D,
-	webgl: ( function () { try { var canvas = document.createElement( 'canvas' ); return !! window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ); } catch( e ) { return false; } } )(),
-	workers: !! window.Worker,
-	fileapi: window.File && window.FileReader && window.FileList && window.Blob,
+    canvas: !!window.CanvasRenderingContext2D,
+    webgl: (function () {
+        try {
+            var canvas = document.createElement('canvas');
+            return !!window.WebGLRenderingContext && ( canvas.getContext('webgl') || canvas.getContext('experimental-webgl') );
+        } catch (e) {
+            return false;
+        }
+    })(),
+    workers: !!window.Worker,
+    fileapi: window.File && window.FileReader && window.FileList && window.Blob,
 
-	getWebGLErrorMessage: function () {
+    getWebGLErrorMessage: function () {
 
-		var element = document.createElement( 'div' );
-		element.className = 'webgl-error';
+        var element = document.createElement('div');
+        element.className = 'webgl-error';
 
-		if ( !this.webgl ) {
+        if (!this.webgl) {
 
-			element.innerHTML = window.WebGLRenderingContext ? [
-				'Your graphics card does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>.<br />',
-				'Find out how to get it <a href="http://get.webgl.org/">here</a>.'
-			].join( '\n' ) : [
-				'Your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>.<br/>',
-				'Find out how to get it <a href="http://get.webgl.org/">here</a>.'
-			].join( '\n' );
+            element.innerHTML = window.WebGLRenderingContext ? [
+                'Your graphics card does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>.<br />',
+                'Find out how to get it <a href="http://get.webgl.org/">here</a>.'
+            ].join('\n') : [
+                'Your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">WebGL</a>.<br/>',
+                'Find out how to get it <a href="http://get.webgl.org/">here</a>.'
+            ].join('\n');
 
-		}
+        }
 
-		return element;
+        return element;
 
-	},
+    },
 
-	addGetWebGLMessage: function (parent ) {
+    addGetWebGLMessage: function (parent) {
 
-		parent.appendChild( Detector.getWebGLErrorMessage() );
+        parent.appendChild(Detector.getWebGLErrorMessage());
 
-	}
+    }
 
 };
